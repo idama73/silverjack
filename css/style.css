@@ -1,0 +1,20 @@
+body{
+    /*background-color: blue;*/
+}
+.playerHand {
+    background-color: white;
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+}
+.card {
+    margin: 0px 4px;
+}
+.individualScore{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+hr {
+    width: 70%;
+}

@@ -31,16 +31,11 @@ function playGame() {
 
 <!DOCTYPE html>
 <html>
-    <style>
-        .playerHand {
-            margin: auto;
-            padding: auto;
-            padding-left: 30%;
-        }
-        .card {
-            margin: 10px;
-        }
-    </style>
+    <head>
+        <title>Lab 3</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
+    </head>
     <body>
         <?php playGame(); ?>
     </body>
