@@ -51,13 +51,13 @@ function averageTime(){
             echo "<div class='time'>";
                 $_SESSION['session'];
                 
-                $start = microtime(true);
+                $elapsedTime = microtime(true);
                 playGame(); 
-                $end = microtime(true) - $start;
+                $elapsedTime = microtime(true) - $elapsedTime;
                 
                 ini_set("precision", 5);
-                array_push($_SESSION['session'],  $end);
-                echo "Elapsed Time: " . $end . "<br>";
+                array_push($_SESSION['session'],  $elapsedTime);
+                echo "Elapsed Time: " . $elapsedTime . "<br>";
                 echo "Average Elapsed Time: " . averageTime() . "<br>";
                 echo "Matches Played: " . count($_SESSION['session']) . "<br>";
             echo "</div>";
