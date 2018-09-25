@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 function playHand(&$deck) {
     $total = 0;
     $suit = array("clubs", "hearts", "diamonds", "spades");
@@ -25,21 +27,41 @@ function playGame() {
     }
     return $playerScores;
 }
+function averageTime(){
+    $average = 0.0;
+    for($i = 0; $i < count($_SESSION['session']); $i++){
+        $average += $_SESSION['session'][$i];
+    }
+    $average /= count($_SESSION['session']);
+    return $average;
+}
 ?>
 
 <!DOCTYPE html>
 <html>
-    <style>
-        .playerHand {
-            margin: auto;
-            padding: auto;
-            padding-left: 30%;
-        }
-        .card {
-            margin: 10px;
-        }
-    </style>
+    <head>
+        <title>Lab 3</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
+    </head>
     <body>
-        <?php playGame(); ?>
+        <?php 
+            echo "<div class='time'>";
+                $_SESSION['session'];
+                
+                $elapsedTime = microtime(true);
+                playGame(); 
+                $elapsedTime = microtime(true) - $elapsedTime;
+                
+                ini_set("precision", 5);
+                array_push($_SESSION['session'],  $elapsedTime);
+                echo "Elapsed Time: " . $elapsedTime . "<br>";
+                echo "Average Elapsed Time: " . averageTime() . "<br>";
+                echo "Matches Played: " . count($_SESSION['session']) . "<br>";
+            echo "</div>";
+        ?>
+        <form>
+            <input type="submit" value="Play again">
+        </form>
     </body>
 </html>
