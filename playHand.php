@@ -2,7 +2,6 @@
 function playHand(&$deck) {
     $total = 0;
     $suit = array("clubs", "hearts", "diamonds", "spades");
-    echo "<hr>";
     echo "<div class='playerHand'>";
     while ($total < 42) {
         if ($total > 38) break;
@@ -24,7 +23,6 @@ function playGame() {
     for ($i = 0; $i < 4; $i++) {
         $playerScores[] = playHand($deck);
     }
-    echo "<hr>";
     return $playerScores;
 }
 ?>
