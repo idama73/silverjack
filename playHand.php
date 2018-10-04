@@ -1,5 +1,13 @@
 <?php
+
+include "math.php";
+
 session_start();
+if (!isset($_SESSION['times'])) {
+    $_SESSION['times'] = array();
+}
+$players = array("Cean", "Arnold", "Jesus", "Eric");
+shuffle($players);
 
 function playHand(&$deck) {
     $total = 0;
@@ -15,24 +23,28 @@ function playHand(&$deck) {
     }
     echo "<span class='individualScore'> score: $total</span>";
     echo "</div>";
+    return $total;
 }
 
-function playGame() {
+function playGame($players) {
     $deck = range(0, 51);
     shuffle($deck);
 
     $playerScores = array();
     for ($i = 0; $i < 4; $i++) {
+        echo "<div class='player'>";
+        echo "<h1>" . $players[$i] . "</h1>";
         $playerScores[] = playHand($deck);
+        echo "</div>";
     }
     return $playerScores;
 }
 function averageTime(){
     $average = 0.0;
-    for($i = 0; $i < count($_SESSION['session']); $i++){
-        $average += $_SESSION['session'][$i];
+    for($i = 0; $i < count($_SESSION['times']); $i++){
+        $average += $_SESSION['times'][$i];
     }
-    $average /= count($_SESSION['session']);
+    $average /= count($_SESSION['times']);
     return $average;
 }
 ?>
@@ -47,17 +59,19 @@ function averageTime(){
     <body>
         <?php 
             echo "<div class='time'>";
-                $_SESSION['session'];
+                global $players;
+                $currTime = microtime(true);
+                $playerScores = playGame($players); 
+                grandTotal($playerScores, $players);
+                $elapsedTime = microtime(true) - $currTime;
                 
-                $elapsedTime = microtime(true);
-                playGame(); 
-                $elapsedTime = microtime(true) - $elapsedTime;
+                
                 
                 ini_set("precision", 5);
-                array_push($_SESSION['session'],  $elapsedTime);
-                echo "Elapsed Time: " . $elapsedTime . "<br>";
-                echo "Average Elapsed Time: " . averageTime() . "<br>";
-                echo "Matches Played: " . count($_SESSION['session']) . "<br>";
+                array_push($_SESSION['times'],  $elapsedTime);
+                echo "<h2>Elapsed Time: " . $elapsedTime . "</h2><br>";
+                echo "<h2>Average Elapsed Time: " . averageTime() . "</h2><br>";
+                echo "<h2>Matches Played: " . count($_SESSION['times']) . "</h2><br>";
             echo "</div>";
         ?>
         <form>

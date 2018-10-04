@@ -30,41 +30,42 @@ function getMax ($a, $b)
     
     return $maxValue;
 }
-function grandTotal ($playerScores)
+function grandTotal ($playerScores, $players)
 {
-    $winner = 0;
+    $winners = array();
     $total = 0;
     
-    sort($playerScores);
+    // Don't want to lose the score/player connection
+    // sort($playerScores);
     
-    for ($i = 0; $i < 4; $i++)
-    {
-        $total += $playerScores[$i];
-        $winner = max($playerScores);
-        if ($playerScores[$i] > 42)
-        {
-            $winner = $playerScores[$i - 1];
-            break;
-        }
+    // for ($i = 0; $i < 4; $i++)
+    // {
+    //     $total += $playerScores[$i];
+    //     // $winner = max($playerScores);
+    //     if ($playerScores[$i] > 42)
+    //     {
+    //         $winner = $playerScores[$i - 1];
+    //         break;
+    //     }
         
-        if (min($playerScores) > 42)
-        {
-            echo "No winner!";
-            break;
-        }
+    //     if (min($playerScores) > 42)
+    //     {
+    //         echo "No winner!";
+    //         break;
+    //     }
+    // }
+    $max = 0;
+    for ($i = 0; $i < 4; $i++) {
+        if ($playerScores[$i] == 42) $max = 42;
+        else if ($playerScores[$i] > $max && $playerScores[$i] < 42) $max = $playerScores[$i];
+    }
+    for ($i = 0; $i < 4; $i++) {
+        if ($playerScores[$i] == $max) array_push($winners, $i);
+        else $total += $playerScores[$i];
     }
     
-    echo "Winner is  player with '$winner' points!";
-    echo "Winner gets '$total' points!";
+    for ($i = 0; $i < count($winners); $i++) {
+        echo "<h2>Winner is " . $players[$winners[$i]] . " with $total points!</h2>";
+    }
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-    <body>
-        <?php
-            $arr = array(32, 46, 38, 17);
-            grandTotal($arr);
-        ?>
-    </body>
-</html>
