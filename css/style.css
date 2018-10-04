@@ -1,15 +1,31 @@
 body{
     font-family: arcadefont;
-    background: #00951E;
+    /*background: #00951E;*/
+    background-image: url("../img/poker.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
 }
-.playerHand, .time {
-    position: relative;
+.time{
+    text-align: center;
     width: 90%;
+    margin: 0 auto;
+}
+.player{
+    position: relative;
+}
+.playerHand {
+    position: relative;
+    width: 80%;
     margin: 0 auto;
     text-align: left;
 }
-.time{
+#playerName{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.title{
     text-align: center;
 }
 .card {

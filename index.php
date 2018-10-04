@@ -33,7 +33,7 @@ function playGame($players) {
     $playerScores = array();
     for ($i = 0; $i < 4; $i++) {
         echo "<div class='player'>";
-        echo "<h1>" . $players[$i] . "</h1>";
+        echo "<h1 id='playerName'>" . $players[$i] . "</h1>";
         $playerScores[] = playHand($deck);
         echo "</div>";
     }
@@ -57,11 +57,14 @@ function averageTime(){
         <link rel="stylesheet" href="css/style.css" type="text/css" />
     </head>
     <body>
+        <h1 class="title">SilverJack</h1>
         <?php 
-            echo "<div class='time'>";
+            //echo "<div class='time'>";
                 global $players;
                 $currTime = microtime(true);
                 $playerScores = playGame($players); 
+                
+                echo "<div class='time'>";
                 grandTotal($playerScores, $players);
                 $elapsedTime = microtime(true) - $currTime;
                 
