@@ -8,6 +8,7 @@ if (!isset($_SESSION['times'])) {
 }
 $players = array("Cean", "Arnold", "Jesus", "Eric");
 shuffle($players);
+$avatars = array("Cean" => "batman.jpg", 'Arnold' => "ironMan.jpg", "Jesus" => "spiderman.png", "Eric" => "hulk.jpg");
 
 function playHand(&$deck) {
     $total = 0;
@@ -29,11 +30,14 @@ function playHand(&$deck) {
 function playGame($players) {
     $deck = range(0, 51);
     shuffle($deck);
+    global $avatars;
 
     $playerScores = array();
     for ($i = 0; $i < 4; $i++) {
         echo "<div class='player'>";
-        echo "<h1 id='playerName'>" . $players[$i] . "</h1>";
+        echo "<h2 id='playerName'>" . $players[$i] . "</h2>";
+        $image = $avatars[$players[$i]];
+        echo "<img class ='avatar' src='img/$image'>";
         $playerScores[] = playHand($deck);
         echo "</div>";
     }
@@ -58,13 +62,13 @@ function averageTime(){
     </head>
     <body>
         <h1 class="title">SilverJack</h1>
+        <hr>
         <?php 
-            //echo "<div class='time'>";
                 global $players;
                 $currTime = microtime(true);
                 $playerScores = playGame($players); 
-                
-                echo "<div class='time'>";
+                echo "<hr>";
+            echo "<div class='time'>";
                 grandTotal($playerScores, $players);
                 $elapsedTime = microtime(true) - $currTime;
                 
