@@ -6,8 +6,8 @@ session_start();
 if (!isset($_SESSION['times'])) {
     $_SESSION['times'] = array();
 }
-$players = array("Cean", "Arnold", "Jesus", "Eric");
-shuffle($players);
+$players = array("Cean", "Arnold", "Jesus", "Eric"); //array for players avater images 
+shuffle($players); // random generator for images 
 $avatars = array("Cean" => "batman.jpg", 'Arnold' => "ironMan.jpg", "Jesus" => "spiderman.png", "Eric" => "hulk.jpg");
 
 function playHand(&$deck) {
