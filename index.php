@@ -61,8 +61,12 @@ function averageTime(){
         <link rel="stylesheet" href="css/style.css" type="text/css" />
     </head>
     <body>
+        <center> 
         <h1 class="title">SilverJack</h1>
+
         <hr>
+
+        </center>
         <?php 
                 global $players;
                 $currTime = microtime(true);
